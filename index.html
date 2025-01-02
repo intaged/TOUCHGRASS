@@ -237,18 +237,26 @@
         /* Add confetti styles */
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
             background-color: #4CAF50;
             position: absolute;
-            top: -10px;
-            z-index: 1;
+            top: -20px;
+            z-index: 3;
+            transform-origin: center;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
 
         @keyframes confettiFall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            0% { 
+                transform: translateY(0) rotate(0deg) scale(1); 
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(100vh) rotate(720deg) scale(0.5); 
+                opacity: 0;
+            }
         }
+
+        @import url('https://fonts.googleapis.com/css2?family=Monarda&display=swap');
     </style>
 </head>
 <body>
@@ -403,14 +411,10 @@
         titleSvg.setAttribute("class", "title-svg");
         titleSvg.setAttribute("viewBox", "0 0 600 100");
         titleSvg.innerHTML = `
-            <path d="M50,50 Q100,20 150,50 T250,50" stroke="white" fill="none">
-                <animate attributeName="d" 
-                         dur="3.5s"
-                         values="M50,50 Q100,50 150,50 T250,50;
-                                M50,50 Q100,20 150,50 T250,50"
-                         fill="freeze" />
-            </path>
-            <text x="50" y="70" font-size="60" font-family="Arial Black">
+            <defs>
+                <path id="curve" d="M30,85 Q200,95 380,85" fill="none"/>
+            </defs>
+            <text x="50" y="70" font-size="60" font-family="Monarda, Arial Black">
                 $TOUCHGRASS
                 <animate attributeName="stroke-dashoffset" 
                          from="1000" 
@@ -418,11 +422,21 @@
                          dur="3s"
                          fill="freeze" />
             </text>
-            <path class="underline" d="M45,85 L355,85" stroke="white" stroke-width="3">
+            <path class="underline" 
+                  d="M30,85 Q200,95 380,85" 
+                  stroke="white" 
+                  stroke-width="3"
+                  stroke-linecap="round">
                 <animate attributeName="stroke-dashoffset"
-                         from="310"
+                         from="400"
                          to="0"
-                         dur="1s"
+                         dur="1.5s"
+                         begin="3s"
+                         fill="freeze" />
+                <animate attributeName="stroke-dasharray"
+                         from="400"
+                         to="400"
+                         dur="1.5s"
                          begin="3s"
                          fill="freeze" />
             </path>
@@ -431,13 +445,16 @@
 
         // Add confetti function
         function createConfetti() {
-            const colors = ['#4CAF50', '#45a049', '#357a38', '#66bb6a'];
-            for (let i = 0; i < 50; i++) {
+            const colors = ['#4CAF50', '#45a049', '#357a38', '#66bb6a', '#81c784', '#a5d6a7'];
+            for (let i = 0; i < 100; i++) {  // Increased number of particles
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.width = 5 + Math.random() * 15 + 'px';  // Varied sizes
+                confetti.style.height = confetti.style.width;
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animation = `confettiFall ${1 + Math.random() * 2}s linear`;
+                confetti.style.animation = `confettiFall ${1.5 + Math.random() * 2}s linear`;
+                confetti.style.opacity = '0.9';  // More visible
                 document.body.appendChild(confetti);
 
                 confetti.addEventListener('animationend', () => {
@@ -446,8 +463,8 @@
             }
         }
 
-        // Trigger confetti after animations complete
-        setTimeout(createConfetti, 4000); // Wait for text and underline to finish
+        // Trigger confetti exactly after animations
+        setTimeout(createConfetti, 4500); // 3s for text + 1.5s for underline
     </script>
 </body>
 </html>
