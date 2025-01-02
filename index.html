@@ -1,709 +1,813 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>$TOUCHGRASS</title>
+
     <style>
+
         * {
+
             cursor: none !important;
+
         }
+
+
 
         body {
+
             margin: 0;
+
             padding: 0;
+
             min-height: 100vh;
+
             background: linear-gradient(180deg, #87CEEB 0%, #4682B4 100%);
+
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             justify-content: center;
+
             font-family: 'Arial Black', Helvetica, sans-serif;
+
             overflow: hidden;
+
             position: relative;
+
             transition: background 0.5s ease;
+
             cursor: none;
+
         }
+
+
 
         .grass-container {
+
             position: absolute;
+
             bottom: 0;
+
             width: 100%;
+
             height: 30vh;
+
             background: linear-gradient(180deg, #228B22 0%, #006400 100%);
+
             display: flex;
+
             justify-content: center;
+
             overflow: hidden;
+
         }
 
+
+
         .grass-blade {
+
             position: absolute;
+
             bottom: 0;
+
             width: 20px;
+
             height: 40px;
+
             background: #32CD32;
+
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+
             animation: sway 3s ease-in-out infinite;
+
             transform-origin: bottom;
+
         }
+
+
 
         @keyframes sway {
+
             0%, 100% { transform: rotate(0deg); }
+
             50% { transform: rotate(5deg); }
+
         }
+
+
 
         .title {
+
             font-size: 8rem;
+
             color: white;
+
             text-shadow: 
+
                 0 0 10px rgba(0,255,0,0.5),
+
                 0 0 20px rgba(0,255,0,0.3),
+
                 0 0 30px rgba(0,255,0,0.2);
+
             z-index: 2;
+
             text-align: center;
+
             margin-bottom: 20vh;
+
             animation: float 3s ease-in-out infinite;
+
         }
 
+
+
         @keyframes float {
+
             0%, 100% { transform: translateY(0); }
+
             50% { transform: translateY(-20px); }
+
         }
+
+
 
         .message-popup {
+
             position: fixed;
+
             background: rgba(0, 0, 0, 0.8);
+
             color: white;
+
             padding: 15px 25px;
+
             border-radius: 10px;
+
             font-size: 1.2rem;
+
             pointer-events: none;
+
             opacity: 0;
+
             transition: opacity 0.3s;
+
             z-index: 1000;
+
         }
+
+
 
         .achievement {
+
             position: fixed;
+
             top: 20px;
+
             right: -500px;
+
             background: #4CAF50;
+
             color: white;
+
             padding: 15px;
+
             border-radius: 10px;
+
             font-size: 1.2rem;
+
             transition: right 0.5s;
+
             z-index: 1000;
+
             white-space: nowrap;
+
             opacity: 0;
+
             transition: right 0.5s, opacity 0.5s;
+
         }
+
+
 
         .grass-blade.touched {
+
             animation: touchedGrass 0.5s ease-out;
+
         }
+
+
 
         @keyframes touchedGrass {
+
             0% { transform: scale(1); }
+
             50% { transform: scale(1.2) rotate(10deg); }
+
             100% { transform: scale(1); }
+
         }
+
+
 
         .leaderboard {
+
             position: fixed;
+
             bottom: 20px;
+
             right: 20px;
+
             background: rgba(0, 0, 0, 0.8);
+
             color: white;
+
             padding: 15px;
+
             border-radius: 10px;
+
             font-family: 'Arial', sans-serif;
+
             z-index: 1000;
+
             min-width: 180px;
+
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+
             border: 2px solid #4CAF50;
+
         }
+
+
 
         .sun-moon {
+
             position: fixed;
+
             top: 40px;
+
             left: 40px;
+
             width: 80px;
+
             height: 80px;
+
             background: #FFD700;
+
             border-radius: 50%;
+
             cursor: none;
+
             transition: all 0.5s ease;
+
             box-shadow: 0 0 50px #FFD700;
+
             z-index: 1000;
+
         }
+
+
 
         .sun-moon.moon {
+
             background: #F4F6F0;
+
             box-shadow: 0 0 50px rgba(244, 246, 240, 0.5);
+
         }
+
+
 
         body.night-mode {
+
             background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+
         }
+
+
 
         .grass-container.night {
+
             background: linear-gradient(180deg, #1b4d1b 0%, #0a2d0a 100%);
+
         }
+
+
 
         .grass-blade.night {
+
             background: #1e4620;
+
         }
+
+
 
         .custom-cursor {
+
             width: 40px;
+
             height: 40px;
+
             background-image: url('hand.png');
+
             background-size: contain;
+
             background-repeat: no-repeat;
+
             position: fixed;
+
             pointer-events: none;
+
             z-index: 10001;
+
         }
+
+
 
         /* SVG path animation for title */
+
         .title-svg {
+
             position: absolute;
-            top: 50%;
+
+            top: 20%;
+
             left: 50%;
-            transform: translate(-50%, -50%);
+
+            transform: translateX(-50%);
+
             z-index: 2;
+
             stroke: white;
+
             stroke-width: 2;
+
             fill: none;
+
             stroke-dasharray: 1000;
+
             stroke-dashoffset: 1000;
-            animation: drawTitle 2s ease forwards, float 3s ease-in-out infinite 2s;
-            margin-bottom: 20vh;
+
+            animation: drawTitle 2s ease forwards;
+
         }
+
+
 
         @keyframes drawTitle {
+
             to {
+
                 stroke-dashoffset: 0;
+
                 fill: white;
+
             }
+
         }
 
-        @keyframes float {
-            0%, 100% { transform: translate(-50%, -50%); }
-            50% { transform: translate(-50%, calc(-50% - 20px)); }
-        }
+
 
         /* Grass drawing animation */
+
         .grass-blade {
+
             stroke-dasharray: 100;
+
             stroke-dashoffset: 100;
+
             animation: drawGrass 1s ease forwards;
+
             animation-delay: calc(var(--delay) * 0.1s);
+
         }
+
+
 
         @keyframes drawGrass {
+
             to {
+
                 stroke-dashoffset: 0;
+
             }
+
         }
+
+
 
         /* Add sketchy effect to grass */
+
         .grass-blade::before {
+
             content: '';
+
             position: absolute;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 100%;
+
             background: #32CD32;
+
             clip-path: polygon(48% 0%, 0% 100%, 100% 100%);
+
             animation: sketchEffect 0.5s ease-out forwards;
+
             animation-delay: calc(var(--delay) * 0.1s + 0.5s);
+
             opacity: 0;
+
         }
+
+
 
         @keyframes sketchEffect {
+
             from {
+
                 opacity: 0;
+
                 transform: scale(0.9);
+
             }
+
             to {
+
                 opacity: 1;
+
                 transform: scale(1);
+
             }
+
         }
 
-        /* Add confetti styles */
-        .confetti {
-            position: fixed;
-            background-color: #4CAF50;
-            position: absolute;
-            top: -20px;
-            z-index: 3;
-            transform-origin: center;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
-        }
-
-        @keyframes confettiFall {
-            0% { 
-                transform: translateY(0) rotate(0deg) scale(1); 
-                opacity: 1;
-            }
-            100% { 
-                transform: translateY(100vh) rotate(720deg) scale(0.5); 
-                opacity: 0;
-            }
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=Monarda&display=swap');
-
-        .twitter-handle {
-            position: fixed;
-            bottom: 40px;
-            left: 40px;
-            z-index: 1000;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .twitter-handle:hover {
-            transform: scale(1);
-        }
-
-        .twitter-handle svg {
-            width: 200px;
-            height: 40px;
-        }
-
-        .twitter-handle a {
-            text-decoration: none;
-            color: white;
-        }
-
-        .twitter-handle path {
-            stroke: white;
-            stroke-width: 2;
-            fill: none;
-            stroke-dasharray: 500;
-            stroke-dashoffset: 500;
-            animation: drawTwitter 0.8s ease forwards 4.5s;
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
-        }
-
-        .twitter-handle:hover path {
-            filter: drop-shadow(0 0 12px rgba(255,255,255,0.4));
-        }
-
-        @keyframes drawTwitter {
-            to {
-                stroke-dashoffset: 0;
-                fill: white;
-            }
-        }
-
-        /* Ambient particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: floatParticle 15s infinite linear;
-        }
-
-        @keyframes floatParticle {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.8;
-            }
-            80% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-20vh) scale(1);
-                opacity: 0;
-            }
-        }
-
-        /* Grass wave effect */
-        .grass-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(255,255,255,0.1) 50%,
-                transparent 100%);
-            animation: waveEffect 8s infinite linear;
-            pointer-events: none;
-        }
-
-        @keyframes waveEffect {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 100%;
-            }
-        }
-
-        /* Enhanced grass interaction */
-        .grass-blade {
-            transition: filter 0.3s ease;
-        }
-
-        .grass-container:hover .grass-blade {
-            filter: brightness(1.2);
-        }
     </style>
+
 </head>
+
 <body>
+
     <div class="custom-cursor"></div>
+
+    <h1 class="title">$TOUCHGRASS</h1>
+
     <div class="grass-container"></div>
+
     <div class="message-popup"></div>
+
     <div class="achievement">🌿 Achievement Unlocked: Grass Toucher!</div>
+
     <div class="leaderboard">
+
         <h2>🌿 Grass Touching Stats</h2>
+
         <div class="score-display">
+
             <span>Touches:</span>
+
             <span class="points">0</span>
+
         </div>
+
         <div class="grass-level">Rank: Grass Newbie</div>
+
     </div>
+
     <div class="sun-moon"></div>
+
     <div class="stars"></div>
+
     <div class="forest"></div>
 
-    <div class="twitter-handle">
-        <a href="https://x.com/TouchGrasssSOL" target="_blank">
-            <svg viewBox="0 0 200 40">
-                <path d="M10,20 L190,20" stroke="white" stroke-width="0.5" opacity="0.3"/>
-                <text x="10" y="25" font-size="16" font-family="Monarda, Arial">
-                    <tspan>@TouchGrasssSOL</tspan>
-                    <animate attributeName="stroke-dashoffset" 
-                             from="500" 
-                             to="0" 
-                             dur="1s"
-                             fill="freeze" />
-                </text>
-            </svg>
-        </a>
-    </div>
+
 
     <script>
+
         const grassContainer = document.querySelector('.grass-container');
+
         const messagePopup = document.querySelector('.message-popup');
+
         const achievement = document.querySelector('.achievement');
+
         const pointsDisplay = document.querySelector('.points');
+
         const grassLevel = document.querySelector('.grass-level');
+
         const sunMoon = document.querySelector('.sun-moon');
+
         const stars = document.querySelector('.stars');
+
         const body = document.body;
+
+        const title = document.querySelector('.title');
+
         let isNightMode = false;
 
+
+
         // Funny messages
+
         const messages = [
+
             "👀 OMG, real grass!",
+
             "🌿 First time outside?",
+
             "😱 It's not pixel art!",
+
             "🌱 Nature.exe is working",
+
             "💚 Grass: Touched ✓",
+
             "🎮 Tutorial: Touch Grass - Completed!",
+
             "🌿 +1 Real Life XP",
+
             "😌 Mom would be proud",
+
             "🌱 Achievement Unlocked: Grass Feeler",
+
             "💪 Sigma Grindset: Paused",
+
             "🤓 Reddit Karma -100",
+
             "📱 Discord Status: Touching Grass",
+
             "🎮 Gamer Mode: Deactivated",
+
             "🌿 Grass Touching Speedrun: PB"
+
         ];
 
+
+
         let touchCount = 0;
+
         let lastMessage = '';
 
+
+
         // Generate grass blades
+
         for(let i = 0; i < 100; i++) {
+
             const blade = document.createElement('div');
+
             blade.className = 'grass-blade';
+
             blade.style.left = `${Math.random() * 100}%`;
+
             blade.style.setProperty('--delay', i); // Add delay variable
+
             blade.style.animationDelay = `${Math.random() * 2}s`;
+
             grassContainer.appendChild(blade);
+
         }
+
+
 
         function updateGrassLevel(touches) {
+
             const levels = [
+
                 { threshold: 0, rank: "Grass Newbie" },
+
                 { threshold: 10, rank: "Grass Apprentice" },
+
                 { threshold: 25, rank: "Grass Enthusiast" },
+
                 { threshold: 50, rank: "Grass Master" },
+
                 { threshold: 100, rank: "Grass Guru" },
+
                 { threshold: 200, rank: "Touch Grass Legend" },
+
                 { threshold: 500, rank: "Grass Whisperer" },
+
                 { threshold: 1000, rank: "Grass God" }
+
             ];
 
+
+
             const currentLevel = levels.reverse().find(level => touches >= level.threshold);
+
             grassLevel.textContent = `Rank: ${currentLevel.rank}`;
+
         }
+
+
 
         // Touch grass interaction
+
         grassContainer.addEventListener('click', (e) => {
+
             touchCount++;
+
             pointsDisplay.textContent = touchCount;
+
             updateGrassLevel(touchCount);
+
             
+
             let message;
+
             do {
+
                 message = messages[Math.floor(Math.random() * messages.length)];
+
             } while (message === lastMessage);
+
             lastMessage = message;
 
+
+
             messagePopup.textContent = message;
+
             messagePopup.style.left = e.pageX + 'px';
+
             messagePopup.style.top = (e.pageY - 50) + 'px';
+
             messagePopup.style.opacity = '1';
+
             
+
             if (touchCount % 10 === 0) {
+
                 achievement.style.right = '20px';
+
                 achievement.style.opacity = '1';
+
                 setTimeout(() => {
+
                     achievement.style.right = '-500px';
+
                     achievement.style.opacity = '0';
+
                 }, 3000);
+
             }
+
+
 
             const blades = document.elementsFromPoint(e.clientX, e.clientY)
+
                 .filter(el => el.classList.contains('grass-blade'));
+
             
+
             blades.forEach(blade => {
+
                 blade.classList.add('touched');
+
                 setTimeout(() => {
+
                     blade.classList.remove('touched');
+
                 }, 500);
+
             });
 
+
+
             setTimeout(() => {
+
                 messagePopup.style.opacity = '0';
+
             }, 2000);
 
+
+
             pointsDisplay.style.transform = 'scale(1.2)';
+
             setTimeout(() => {
+
                 pointsDisplay.style.transform = 'scale(1)';
+
             }, 200);
+
         });
+
+
 
         // Toggle day/night
+
         sunMoon.addEventListener('click', () => {
+
             isNightMode = !isNightMode;
+
             
+
             sunMoon.classList.toggle('moon');
+
             body.classList.toggle('night-mode');
+
             stars.classList.toggle('visible');
+
+            title.classList.toggle('night');
+
+            grassContainer.classList.toggle('night');
+
             
+
             document.querySelectorAll('.grass-blade').forEach(blade => {
+
                 blade.classList.toggle('night');
+
             });
 
+
+
             if (isNightMode) {
+
                 sunMoon.style.transform = 'rotate(360deg)';
+
             } else {
+
                 sunMoon.style.transform = 'rotate(0deg)';
+
             }
+
         });
+
+
 
         // Cursor movement
+
         const cursor = document.querySelector('.custom-cursor');
+
         document.addEventListener('mousemove', (e) => {
+
             cursor.style.left = e.clientX - 20 + 'px';
+
             cursor.style.top = e.clientY - 20 + 'px';
+
         });
+
+
 
         // Add SVG title with drawing animation
+
         const titleSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+
         titleSvg.setAttribute("class", "title-svg");
+
         titleSvg.setAttribute("viewBox", "0 0 600 100");
+
         titleSvg.innerHTML = `
-            <defs>
-                <path id="curve" d="M20,85 Q300,95 580,85" fill="none"/>
-            </defs>
-            <text x="50" y="70" font-size="60" font-family="Monarda, Arial Black">
-                $TOUCHGRASS
-                <animate attributeName="stroke-dashoffset" 
-                         from="1000" 
-                         to="0" 
-                         dur="3s"
+
+            <path d="M50,50 Q100,20 150,50 T250,50" stroke="white" fill="none">
+
+                <animate attributeName="d" 
+
+                         dur="2s" 
+
+                         values="M50,50 Q100,50 150,50 T250,50;
+
+                                M50,50 Q100,20 150,50 T250,50"
+
                          fill="freeze" />
-            </text>
-            <path class="underline" 
-                  d="M20,85 Q300,95 580,85" 
-                  stroke="white" 
-                  stroke-width="3"
-                  stroke-linecap="round">
-                <animate attributeName="stroke-dashoffset"
-                         from="600"
-                         to="0"
-                         dur="1.5s"
-                         begin="3s"
-                         fill="freeze" />
-                <animate attributeName="stroke-dasharray"
-                         from="600"
-                         to="600"
-                         dur="1.5s"
-                         begin="3s"
-                         fill="freeze" />
+
             </path>
+
+            <text x="50" y="70" font-size="60" font-family="Arial Black">
+
+                $TOUCHGRASS
+
+                <animate attributeName="stroke-dashoffset" 
+
+                         from="1000" 
+
+                         to="0" 
+
+                         dur="2s" 
+
+                         fill="freeze" />
+
+            </text>
+
         `;
+
         document.body.insertBefore(titleSvg, document.querySelector('.title'));
 
-        // Enhanced confetti function
-        function createConfetti() {
-            const colors = ['#4CAF50', '#45a049', '#357a38', '#66bb6a', '#81c784', '#a5d6a7'];
-            
-            // Create explosion effect
-            for (let i = 0; i < 150; i++) {  // More particles
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                
-                // Center the initial position
-                confetti.style.left = '50%';
-                confetti.style.top = '50%';
-                
-                // Random sizes
-                const size = 5 + Math.random() * 15;
-                confetti.style.width = size + 'px';
-                confetti.style.height = size + 'px';
-                
-                // Random colors
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Random directions
-                const angle = Math.random() * 360;
-                const velocity = 15 + Math.random() * 15;
-                confetti.style.setProperty('--angle', angle + 'deg');
-                confetti.style.setProperty('--velocity', velocity + 'px');
-                
-                confetti.style.animation = `confettiExplosion 3s ease-out forwards`;  // Longer duration
-                document.body.appendChild(confetti);
-
-                confetti.addEventListener('animationend', () => {
-                    confetti.remove();
-                });
-            }
-        }
-
-        // Add these styles
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes confettiExplosion {
-                0% {
-                    transform: translate(-50%, -50%) rotate(0deg);
-                    opacity: 1;
-                }
-                15% {
-                    transform: translate(
-                        calc(-50% + (var(--velocity) * cos(var(--angle)))), 
-                        calc(-50% + (var(--velocity) * sin(var(--angle))))
-                    ) rotate(360deg);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translate(
-                        calc(-50% + (var(--velocity) * 3 * cos(var(--angle)))), 
-                        calc(-50% + (var(--velocity) * 3 * sin(var(--angle)) + 200px))
-                    ) rotate(720deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Trigger confetti exactly after animations
-        setTimeout(createConfetti, 4500); // 3s for text + 1.5s for underline
-
-        // Create ambient particles
-        function createParticles() {
-            const particlesContainer = document.createElement('div');
-            particlesContainer.className = 'particles';
-            document.body.appendChild(particlesContainer);
-
-            for(let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                
-                // Random size
-                const size = Math.random() * 4 + 2;
-                particle.style.width = size + 'px';
-                particle.style.height = size + 'px';
-                
-                // Random position
-                particle.style.left = Math.random() * 100 + 'vw';
-                
-                // Random animation delay
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-        createParticles();
-
-        // Add ripple effect on mouse move
-        let timeout;
-        grassContainer.addEventListener('mousemove', (e) => {
-            clearTimeout(timeout);
-            const rect = grassContainer.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const ripple = document.createElement('div');
-            ripple.style.cssText = `
-                position: absolute;
-                left: ${x}px;
-                top: ${y}px;
-                width: 2px;
-                height: 2px;
-                background: rgba(255,255,255,0.5);
-                border-radius: 50%;
-                pointer-events: none;
-                animation: ripple 1s ease-out;
-            `;
-            
-            grassContainer.appendChild(ripple);
-            timeout = setTimeout(() => ripple.remove(), 1000);
-        });
-
-        // Add ripple animation
-        const rippleStyle = document.createElement('style');
-        rippleStyle.textContent = `
-            @keyframes ripple {
-                0% {
-                    transform: scale(1);
-                    opacity: 1;
-                }
-                100% {
-                    transform: scale(50);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(rippleStyle);
     </script>
+
 </body>
+
 </html>
