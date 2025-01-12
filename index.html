@@ -70,6 +70,8 @@
 
             overflow: hidden;
 
+            perspective: 1000px;
+
         }
 
 
@@ -84,23 +86,73 @@
 
             height: 40px;
 
-            background: #32CD32;
+            background: linear-gradient(to top, #32CD32, #228B22);
 
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 
-            animation: sway 3s ease-in-out infinite;
-
             transform-origin: bottom;
+
+            animation: 
+
+                grassSway 3s ease-in-out infinite,
+
+                grassWave 4s ease-in-out infinite;
+
+            will-change: transform;
 
         }
 
 
 
-        @keyframes sway {
+        @keyframes grassSway {
 
-            0%, 100% { transform: rotate(0deg); }
+            0%, 100% { 
 
-            50% { transform: rotate(5deg); }
+                transform: rotate(0deg) scale(1); 
+
+            }
+
+            25% { 
+
+                transform: rotate(4deg) scale(0.98); 
+
+            }
+
+            50% { 
+
+                transform: rotate(-2deg) scale(1.02); 
+
+            }
+
+            75% { 
+
+                transform: rotate(2deg) scale(0.99); 
+
+            }
+
+        }
+
+
+
+        @keyframes grassWave {
+
+            0% { 
+
+                filter: brightness(1);
+
+            }
+
+            50% { 
+
+                filter: brightness(1.1);
+
+            }
+
+            100% { 
+
+                filter: brightness(1);
+
+            }
 
         }
 
@@ -604,6 +656,50 @@
 
         }
 
+
+
+        .motivation-popup {
+
+            position: fixed;
+
+            padding: 15px 25px;
+
+            background: rgba(0, 0, 0, 0.8);
+
+            color: white;
+
+            border-radius: 10px;
+
+            font-size: 1.2rem;
+
+            z-index: 1000;
+
+            opacity: 0;
+
+            transform: translateY(20px);
+
+            transition: opacity 0.3s, transform 0.3s;
+
+            border: 2px solid #4CAF50;
+
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+
+            text-align: center;
+
+            pointer-events: none;
+
+        }
+
+
+
+        .motivation-popup.show {
+
+            opacity: 1;
+
+            transform: translateY(0);
+
+        }
+
     </style>
 
 </head>
@@ -674,6 +770,10 @@
 
 
 
+    <div class="motivation-popup"></div>
+
+
+
     <script>
 
         const grassContainer = document.querySelector('.grass-container');
@@ -740,21 +840,75 @@
 
         // Generate grass blades
 
-        for(let i = 0; i < 100; i++) {
+        function generateGrass() {
 
-            const blade = document.createElement('div');
+            const bladeCount = 150; // Increased number of blades
 
-            blade.className = 'grass-blade';
+            
 
-            blade.style.left = `${Math.random() * 100}%`;
+            for(let i = 0; i < bladeCount; i++) {
 
-            blade.style.setProperty('--delay', i); // Add delay variable
+                const blade = document.createElement('div');
 
-            blade.style.animationDelay = `${Math.random() * 2}s`;
+                blade.className = 'grass-blade';
 
-            grassContainer.appendChild(blade);
+                
+
+                // Randomize blade properties
+
+                const height = 30 + Math.random() * 20; // Random height between 30-50px
+
+                const width = 8 + Math.random() * 12; // Random width between 8-20px
+
+                const position = Math.random() * 100; // Random position
+
+                const delay = Math.random() * 2; // Random animation delay
+
+                const duration = 2 + Math.random() * 2; // Random animation duration
+
+                
+
+                blade.style.height = `${height}px`;
+
+                blade.style.width = `${width}px`;
+
+                blade.style.left = `${position}%`;
+
+                blade.style.animationDelay = `-${delay}s, -${delay * 1.5}s`;
+
+                blade.style.animationDuration = `${duration}s, ${duration * 1.3}s`;
+
+                
+
+                // Add slight color variation
+
+                const hue = Math.random() * 20 - 10; // ±10 hue variation
+
+                const saturation = 100 + (Math.random() * 20 - 10); // ±10% saturation
+
+                const lightness = 40 + (Math.random() * 20 - 10); // ±10% lightness
+
+                blade.style.background = `linear-gradient(to top, 
+
+                    hsl(120, ${saturation}%, ${lightness}%),
+
+                    hsl(120, ${saturation}%, ${lightness + 10}%)
+
+                )`;
+
+                
+
+                grassContainer.appendChild(blade);
+
+            }
 
         }
+
+
+
+        // Call the function when the page loads
+
+        document.addEventListener('DOMContentLoaded', generateGrass);
 
 
 
@@ -791,6 +945,36 @@
 
 
         // Touch grass interaction
+
+        function touchGrass(x, y) {
+
+            const blades = document.elementsFromPoint(x, y)
+
+                .filter(el => el.classList.contains('grass-blade'));
+
+            
+
+            blades.forEach(blade => {
+
+                blade.style.animation = 'none';
+
+                blade.offsetHeight; // Trigger reflow
+
+                blade.style.animation = `
+
+                    grassSway 3s ease-in-out infinite,
+
+                    grassWave 4s ease-in-out infinite,
+
+                    touchedGrass 0.5s ease-out
+
+                `;
+
+            });
+
+        }
+
+
 
         grassContainer.addEventListener('click', (e) => {
 
@@ -842,23 +1026,7 @@
 
 
 
-            const blades = document.elementsFromPoint(e.clientX, e.clientY)
-
-                .filter(el => el.classList.contains('grass-blade'));
-
-            
-
-            blades.forEach(blade => {
-
-                blade.classList.add('touched');
-
-                setTimeout(() => {
-
-                    blade.classList.remove('touched');
-
-                }, 500);
-
-            });
+            touchGrass(e.clientX, e.clientY);
 
 
 
@@ -877,6 +1045,10 @@
                 pointsDisplay.style.transform = 'scale(1)';
 
             }, 200);
+
+
+
+            checkRankProgress(touchCount);
 
         });
 
@@ -1135,6 +1307,116 @@
         // Trigger confetti exactly after animations
 
         setTimeout(createConfetti, 4500); // 3s for text + 1.5s for underline
+
+
+
+        const motivationPopup = document.querySelector('.motivation-popup');
+
+        const motivationalMessages = [
+
+            "🌱 Don't let others touch grass before you!",
+
+            "🏆 Your rank awaits! Touch more grass!",
+
+            "💪 You're just one touch away from greatness!",
+
+            "🌿 The grass isn't greener elsewhere - touch it here!",
+
+            "⭐ Future Grass God in training!",
+
+            "🎮 Put down that controller and touch some grass!",
+
+            "🌱 Your grass touching skills are legendary!",
+
+            "💫 Touch grass to assert dominance!",
+
+            "🎯 Target acquired: Fresh grass ahead!",
+
+            "🚀 To the moon? No - to the grass!"
+
+        ];
+
+
+
+        function showMotivationalMessage() {
+
+            if (Math.random() < 0.3 && !motivationPopup.classList.contains('show')) {
+
+                const message = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+
+                motivationPopup.textContent = message;
+
+                
+
+                // Random position (avoiding edges)
+
+                const maxX = window.innerWidth - motivationPopup.offsetWidth - 40;
+
+                const maxY = window.innerHeight - motivationPopup.offsetHeight - 40;
+
+                const randomX = 20 + Math.random() * maxX;
+
+                const randomY = 20 + Math.random() * (maxY - 100); // Avoid bottom grass area
+
+                
+
+                motivationPopup.style.left = `${randomX}px`;
+
+                motivationPopup.style.top = `${randomY}px`;
+
+                
+
+                motivationPopup.classList.add('show');
+
+                
+
+                setTimeout(() => {
+
+                    motivationPopup.classList.remove('show');
+
+                }, 3000);
+
+            }
+
+        }
+
+
+
+        // Show messages periodically
+
+        setInterval(showMotivationalMessage, 8000);
+
+
+
+        // Also show messages when close to rank up
+
+        function checkRankProgress(touches) {
+
+            const nextRank = [10, 25, 50, 100, 200, 500, 1000].find(threshold => touches < threshold);
+
+            if (nextRank && (nextRank - touches) <= 3) {
+
+                motivationPopup.textContent = `🎯 Only ${nextRank - touches} more touches to rank up!`;
+
+                motivationPopup.style.left = '50%';
+
+                motivationPopup.style.top = '20%';
+
+                motivationPopup.style.transform = 'translateX(-50%)';
+
+                motivationPopup.classList.add('show');
+
+                
+
+                setTimeout(() => {
+
+                    motivationPopup.classList.remove('show');
+
+                }, 3000);
+
+            }
+
+        }
 
     </script>
 
