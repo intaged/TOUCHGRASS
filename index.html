@@ -72,6 +72,8 @@
 
             perspective: 1000px;
 
+
+
         }
 
 
@@ -88,73 +90,138 @@
 
             background: linear-gradient(to top, #32CD32, #228B22);
 
+
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 
             transform-origin: bottom;
 
             animation: 
 
+
+
                 grassSway 3s ease-in-out infinite,
+
+
 
                 grassWave 4s ease-in-out infinite;
 
+
+
             will-change: transform;
 
+
+
         }
+
+
+
+
 
 
 
         @keyframes grassSway {
 
+
+
             0%, 100% { 
+
+
 
                 transform: rotate(0deg) scale(1); 
 
+
+
             }
+
+
 
             25% { 
 
+
+
                 transform: rotate(4deg) scale(0.98); 
 
+
+
             }
+
+
 
             50% { 
 
+
+
                 transform: rotate(-2deg) scale(1.02); 
 
+
+
             }
+
+
 
             75% { 
 
+
+
                 transform: rotate(2deg) scale(0.99); 
+
+
 
             }
 
+
+
         }
+
+
+
+
 
 
 
         @keyframes grassWave {
 
+
+
             0% { 
+
+
 
                 filter: brightness(1);
 
+
+
             }
+
+
 
             50% { 
 
+
+
                 filter: brightness(1.1);
 
+
+
             }
+
+
 
             100% { 
 
+
+
                 filter: brightness(1);
+
+
 
             }
 
+
+
         }
+
+
 
 
 
@@ -198,23 +265,85 @@
 
             position: fixed;
 
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(255, 255, 255, 0.95);
 
-            color: white;
 
-            padding: 15px 25px;
+            color: #228B22;
 
-            border-radius: 10px;
 
-            font-size: 1.2rem;
+            padding: 12px 20px;
+
+
+            border-radius: 20px;
+
+
+            font-size: 1.1rem;
+
 
             pointer-events: none;
 
             opacity: 0;
 
-            transition: opacity 0.3s;
+            transform: translateY(20px) scale(0.95);
+
+
+
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
 
             z-index: 1000;
+
+            box-shadow: 
+
+
+
+                0 4px 15px rgba(0, 0, 0, 0.1),
+
+
+
+                0 0 20px rgba(50, 205, 50, 0.2);
+
+
+
+            border: 2px solid rgba(50, 205, 50, 0.3);
+
+
+
+            backdrop-filter: blur(5px);
+
+
+
+            font-family: 'Arial', sans-serif;
+
+
+
+            text-align: center;
+
+
+
+            max-width: 280px;
+
+
+
+        }
+
+
+
+
+
+
+
+        .message-popup.show {
+
+
+
+            opacity: 1;
+
+
+
+            transform: translateY(0) scale(1);
+
+
 
         }
 
@@ -228,17 +357,22 @@
 
             right: -500px;
 
-            background: #4CAF50;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+
 
             color: white;
 
-            padding: 15px;
+            padding: 15px 25px;
 
-            border-radius: 10px;
 
-            font-size: 1.2rem;
+            border-radius: 20px;
 
-            transition: right 0.5s;
+
+            font-size: 1.1rem;
+
+
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
 
             z-index: 1000;
 
@@ -246,7 +380,24 @@
 
             opacity: 0;
 
-            transition: right 0.5s, opacity 0.5s;
+            box-shadow: 
+
+
+
+                0 4px 15px rgba(0, 0, 0, 0.1),
+
+
+
+                0 0 30px rgba(76, 175, 80, 0.3);
+
+
+
+            border: 2px solid rgba(255, 255, 255, 0.2);
+
+
+
+            backdrop-filter: blur(5px);
+
 
         }
 
@@ -400,19 +551,52 @@
 
             z-index: 2;
 
+            margin-bottom: 20vh;
+
+
+
+        }
+
+
+
+
+
+
+
+        .title-svg text {
+
+
+
+            fill: white;
+
+
+
+            filter: drop-shadow(0 0 10px rgba(0,255,0,0.5));
+
+
+
+        }
+
+
+
+
+
+
+
+        .title-svg .underline {
+
+
+
             stroke: white;
 
-            stroke-width: 2;
+
+
+            stroke-width: 3;
+
+
 
             fill: none;
 
-            stroke-dasharray: 1000;
-
-            stroke-dashoffset: 1000;
-
-            animation: drawTitle 2s ease forwards, float 3s ease-in-out infinite 2s;
-
-            margin-bottom: 20vh;
 
         }
 
@@ -580,27 +764,72 @@
 
             z-index: 1000;
 
-            transform: scale(0.9);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
 
-            transition: transform 0.3s ease;
+
+
+            padding: 12px 20px;
+
+
+
+            border-radius: 50px;
+
+
+
+            backdrop-filter: blur(5px);
+
+
+
+            border: 2px solid rgba(255, 255, 255, 0.2);
+
+
+
+            transform: translateY(0);
+
+
+
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+
+
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+
 
         }
+
+
+
+
 
 
 
         .twitter-handle:hover {
 
-            transform: scale(1);
-
-        }
 
 
+            transform: translateY(-5px);
 
-        .twitter-handle svg {
 
-            width: 200px;
 
-            height: 40px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.3));
+
+
+
+            box-shadow: 
+
+
+
+                0 8px 25px rgba(0, 0, 0, 0.2),
+
+
+
+                0 0 20px rgba(50, 205, 50, 0.3);
+
+
+
+            border-color: rgba(50, 205, 50, 0.5);
+
 
         }
 
@@ -612,91 +841,961 @@
 
             color: white;
 
-        }
+            display: flex;
 
 
 
-        .twitter-handle path {
+            align-items: center;
 
-            stroke: white;
 
-            stroke-width: 2;
 
-            fill: none;
+            gap: 12px;
 
-            stroke-dasharray: 500;
 
-            stroke-dashoffset: 500;
-
-            animation: drawTwitter 0.8s ease forwards 4.5s;
-
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
 
         }
 
 
 
-        .twitter-handle:hover path {
 
-            filter: drop-shadow(0 0 12px rgba(255,255,255,0.4));
+
+
+
+        .twitter-handle .x-icon {
+
+
+
+            width: 24px;
+
+
+
+            height: 24px;
+
+
+
+            fill: white;
+
+
+
+            transition: transform 0.3s ease;
+
+
 
         }
 
 
 
-        @keyframes drawTwitter {
 
-            to {
 
-                stroke-dashoffset: 0;
 
-                fill: white;
 
-            }
+        .twitter-handle:hover .x-icon {
+
+
+
+            transform: scale(1.1) rotate(360deg);
+
+
 
         }
+
+
+
+
+
+
+
+        .twitter-handle .handle-text {
+
+
+
+            font-family: 'Monarda', Arial;
+
+
+
+            font-size: 18px;
+
+
+
+            letter-spacing: 0.5px;
+
+
+
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+
+
+            position: relative;
+
+
+
+            overflow: hidden;
+
+
+
+        }
+
+
+
+
+
+
+
+        .twitter-handle .handle-text::after {
+
+
+
+            content: '';
+
+
+
+            position: absolute;
+
+
+
+            bottom: -2px;
+
+
+
+            left: 0;
+
+
+
+            width: 100%;
+
+
+
+            height: 2px;
+
+
+
+            background: linear-gradient(90deg, transparent, #4CAF50, transparent);
+
+
+
+            transform: translateX(-100%);
+
+
+
+            transition: transform 0.3s ease;
+
+
+
+        }
+
+
+
+
+
+
+
+        .twitter-handle:hover .handle-text::after {
+
+
+
+            transform: translateX(100%);
+
+
+
+        }
+
+
+
+
+
+
+
+        @keyframes pulse {
+
+
+
+            0% { transform: scale(1); }
+
+
+
+            50% { transform: scale(1.05); }
+
+
+
+            100% { transform: scale(1); }
+
+
+
+        }
+
+
+
+
+
+
+
+        .twitter-handle.pulse {
+
+
+
+            animation: pulse 2s infinite;
+
+
+
+        }
+
+
+
+
 
 
 
         .motivation-popup {
 
+
+
             position: fixed;
+
+
 
             padding: 15px 25px;
 
-            background: rgba(0, 0, 0, 0.8);
 
-            color: white;
 
-            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
 
-            font-size: 1.2rem;
+
+
+            color: #228B22;
+
+
+
+            border-radius: 20px;
+
+
+
+            font-size: 1.1rem;
+
+
 
             z-index: 1000;
 
+
+
             opacity: 0;
 
-            transform: translateY(20px);
 
-            transition: opacity 0.3s, transform 0.3s;
 
-            border: 2px solid #4CAF50;
+            transform: translateY(20px) scale(0.95);
 
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+
+
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+
+
+            box-shadow: 
+
+
+
+                0 4px 15px rgba(0, 0, 0, 0.1),
+
+
+
+                0 0 25px rgba(50, 205, 50, 0.2);
+
+
+
+            border: 2px solid rgba(50, 205, 50, 0.3);
+
+
+
+            backdrop-filter: blur(5px);
+
+
 
             text-align: center;
 
+
+
             pointer-events: none;
+
+
+
+            max-width: 300px;
+
+
 
         }
 
 
 
+
+
+
+
         .motivation-popup.show {
+
+
 
             opacity: 1;
 
-            transform: translateY(0);
+
+
+            transform: translateY(0) scale(1);
+
+
+
+        }
+
+
+
+
+
+
+
+        /* Add animation for popup entrance */
+
+
+
+        @keyframes popupEntrance {
+
+
+
+            0% {
+
+
+
+                opacity: 0;
+
+
+
+                transform: translateY(20px) scale(0.95);
+
+
+
+            }
+
+
+
+            100% {
+
+
+
+                opacity: 1;
+
+
+
+                transform: translateY(0) scale(1);
+
+
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-screen {
+
+
+
+            position: fixed;
+
+
+
+            top: 0;
+
+
+
+            left: 0;
+
+
+
+            width: 100%;
+
+
+
+            height: 100%;
+
+
+
+            background: linear-gradient(180deg, 
+
+
+
+                #87CEEB 0%, 
+
+
+
+                #B0E2FF 40%, 
+
+
+
+                #E8F4D9 80%, 
+
+
+
+                #90EE90 100%);
+
+
+
+            z-index: 9999;
+
+
+
+            display: flex;
+
+
+
+            flex-direction: column;
+
+
+
+            align-items: center;
+
+
+
+            justify-content: center;
+
+
+
+            transition: opacity 0.5s ease-out;
+
+
+
+            overflow: hidden;
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-cloud {
+
+
+
+            position: absolute;
+
+
+
+            background: rgba(255, 255, 255, 0.9);
+
+
+
+            border-radius: 50px;
+
+
+
+            height: 30px;
+
+
+
+            animation: floatCloud linear infinite;
+
+
+
+            opacity: 0.8;
+
+
+
+            filter: blur(2px);
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-cloud::before,
+
+
+
+        .loading-cloud::after {
+
+
+
+            content: '';
+
+
+
+            position: absolute;
+
+
+
+            background: rgba(255, 255, 255, 0.9);
+
+
+
+            border-radius: 50%;
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-cloud::before {
+
+
+
+            width: 50px;
+
+
+
+            height: 50px;
+
+
+
+            top: -20px;
+
+
+
+            left: 15px;
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-cloud::after {
+
+
+
+            width: 40px;
+
+
+
+            height: 40px;
+
+
+
+            top: -15px;
+
+
+
+            left: 35px;
+
+
+
+        }
+
+
+
+
+
+
+
+        @keyframes floatCloud {
+
+
+
+            from {
+
+
+
+                transform: translateX(-150px);
+
+
+
+            }
+
+
+
+            to {
+
+
+
+                transform: translateX(calc(100vw + 150px));
+
+
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-ground {
+
+
+
+            position: absolute;
+
+
+
+            bottom: 0;
+
+
+
+            width: 100%;
+
+
+
+            height: 30%;
+
+
+
+            background: linear-gradient(180deg, 
+
+
+
+                #90EE90 0%,
+
+
+
+                #654321 100%);
+
+
+
+            transform-origin: bottom;
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-grass-container {
+
+
+
+            position: absolute;
+
+
+
+            bottom: 0;
+
+
+
+            width: 100%;
+
+
+
+            height: 30%;
+
+
+
+            overflow: hidden;
+
+
+
+            background: linear-gradient(180deg, transparent, #654321);
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-grass {
+
+
+
+            position: absolute;
+
+
+
+            bottom: 0;
+
+
+
+            width: 20px;
+
+
+
+            height: 40px;
+
+
+
+            background: linear-gradient(to top, #32CD32, #228B22);
+
+
+
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+
+
+
+            transform-origin: bottom;
+
+
+
+            transform: scaleY(0);
+
+
+
+            animation: grassSway 3s ease-in-out infinite;
+
+
+
+            transition: transform 0.3s ease-out;
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-text {
+
+
+
+            position: absolute;
+
+
+
+            top: 40%;
+
+
+
+            color: white;
+
+
+
+            font-size: 2rem;
+
+
+
+            text-align: center;
+
+
+
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+
+
+            opacity: 0;
+
+
+
+            animation: fadeInOut 2s infinite;
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-progress {
+
+
+
+            position: absolute;
+
+
+
+            top: 50%;
+
+
+
+            color: white;
+
+
+
+            font-size: 3rem;
+
+
+
+            font-weight: bold;
+
+
+
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+
+
+
+        }
+
+
+
+
+
+
+
+        @keyframes growGrass {
+
+
+
+            0% {
+
+
+
+                height: 0;
+
+
+
+                transform: scaleY(0);
+
+
+
+            }
+
+
+
+            100% {
+
+
+
+                height: 40px;
+
+
+
+                transform: scaleY(1);
+
+
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+        @keyframes fadeInOut {
+
+
+
+            0%, 100% { opacity: 0.5; }
+
+
+
+            50% { opacity: 1; }
+
+
+
+        }
+
+
+
+
+
+
+
+        .loading-title {
+
+
+
+            position: absolute;
+
+
+
+            top: 30%;
+
+
+
+            color: white;
+
+
+
+            font-size: 4rem;
+
+
+
+            text-shadow: 0 0 10px rgba(0,255,0,0.5);
+
+
+
+            opacity: 0;
+
+
+
+            transform: translateY(20px);
+
+
+
+            transition: all 0.5s ease;
+
+
+
+        }
+
+
+
+
+
+
+
+        body > *:not(.loading-screen) {
+
+
+
+            transition: opacity 0.5s ease-in;
+
+
+
+        }
+
+
+
+
+
+
+
+        @keyframes grassSway {
+
+
+
+            0%, 100% { transform: rotate(0deg) scaleY(var(--growth-scale, 0)); }
+
+
+
+            25% { transform: rotate(4deg) scaleY(var(--growth-scale, 0)); }
+
+
+
+            50% { transform: rotate(-2deg) scaleY(var(--growth-scale, 0)); }
+
+
+
+            75% { transform: rotate(2deg) scaleY(var(--growth-scale, 0)); }
+
+
 
         }
 
@@ -742,31 +1841,31 @@
 
         <a href="https://x.com/TouchGrasssSOL" target="_blank">
 
-            <svg viewBox="0 0 200 40">
+            <svg class="x-icon" viewBox="0 0 24 24">
 
-                <path d="M10,20 L190,20" stroke="white" stroke-width="0.5" opacity="0.3"/>
 
-                <text x="10" y="25" font-size="16" font-family="Monarda, Arial">
 
-                    <tspan>@TouchGrasssSOL</tspan>
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
 
-                    <animate attributeName="stroke-dashoffset" 
 
-                             from="500" 
-
-                             to="0" 
-
-                             dur="1s"
-
-                             fill="freeze" />
-
-                </text>
 
             </svg>
 
+
+
+            <span class="handle-text">@TouchGrasssSOL</span>
+
+
+
         </a>
 
+
+
     </div>
+
+
+
+
 
 
 
@@ -774,649 +1873,1062 @@
 
 
 
+
+
+
+
+    <div class="loading-screen">
+
+
+
+        <div class="loading-ground"></div>
+
+
+
+        <div class="loading-grass-container"></div>
+
+
+
+        <div class="loading-text">Preparing your patch of grass...</div>
+
+
+
+        <div class="loading-progress">0%</div>
+
+
+    </div>
+
+
+
+    <div class="title-container">
+
+
+        <svg class="title-svg" viewBox="0 0 600 100">
+
+
+            <text x="50" y="70" font-size="60" font-family="Arial Black, sans-serif" fill="white">
+
+
+                $TOUCHGRASS
+
+
+            </text>
+
+
+            <path class="underline" 
+
+
+                  d="M20,85 Q300,95 580,85" 
+
+
+                  stroke="white" 
+
+
+                  stroke-width="3"
+
+
+                  stroke-linecap="round"
+
+
+                  fill="none"/>
+
+
+        </svg>
+
+
+    </div>
+
+
+
+
     <script>
+
+
+        // Loading screen functionality
+
+
+
+        const loadingScreen = document.querySelector('.loading-screen');
+
+
+
+        const loadingText = document.querySelector('.loading-text');
+
+
+
+        const loadingProgress = document.querySelector('.loading-progress');
+
+
+
+        const loadingGrassContainer = document.querySelector('.loading-grass-container');
+
+
+
+
+
+
+
+        const loadingTexts = [
+
+
+
+            "Preparing your patch of grass...",
+
+
+
+            "Grass is growing... are you ready to touch it?",
+
+
+
+            "Watering the grass...",
+
+
+
+            "Making the grass extra touchable...",
+
+
+
+            "Nature loading...",
+
+
+
+            "Touch grass initialization..."
+
+
+
+        ];
+
+
+
+
+
+
+
+        // Create initial grass blades for loading screen
+
+
+
+        function createLoadingGrass() {
+
+
+
+            loadingGrassContainer.innerHTML = ''; // Clear existing grass
+
+
+
+            const grassCount = 100; // More grass blades
+
+
+
+            
+
+
+
+            for(let i = 0; i < grassCount; i++) {
+
+
+
+                const grass = document.createElement('div');
+
+
+
+                grass.className = 'loading-grass';
+
+
+
+                grass.style.left = `${Math.random() * 100}%`;
+
+
+
+                grass.style.animationDelay = `${Math.random() * 2}s`;
+
+
+
+                // Vary grass heights
+
+
+
+                const height = 30 + Math.random() * 20;
+
+
+
+                grass.style.height = `${height}px`;
+
+
+
+                loadingGrassContainer.appendChild(grass);
+
+
+
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+        createLoadingGrass();
+
+
+
+
+
+
+
+        // Hide main content initially
+
+
+
+        document.querySelectorAll('body > *:not(.loading-screen)').forEach(el => {
+
+
+
+            el.style.opacity = '0';
+
+
+
+        });
+
+
+
+
+
+
+
+        // Simulate loading progress
+
+
+
+        let progress = 0;
+
+
+
+        const loadingInterval = setInterval(() => {
+
+
+
+            progress += Math.random() * 8 + 4;
+
+
+
+            
+
+
+
+            if(progress >= 100) {
+
+
+
+                progress = 100;
+
+
+
+                clearInterval(loadingInterval);
+
+
+
+                
+
+
+
+                // Fade out clouds
+
+
+
+                document.querySelectorAll('.loading-cloud').forEach(cloud => {
+
+
+
+                    cloud.style.opacity = '0';
+
+
+
+                    cloud.style.transition = 'opacity 0.5s ease-out';
+
+
+
+                });
+
+
+
+                
+
+
+
+                // Fully grow all grass at 100%
+
+
+
+                document.querySelectorAll('.loading-grass').forEach(grass => {
+
+
+
+                    grass.style.setProperty('--growth-scale', '1');
+
+
+
+                });
+
+
+
+                
+
+
+
+                setTimeout(() => {
+
+
+
+                    loadingScreen.style.opacity = '0';
+
+
+
+                    document.querySelectorAll('body > *:not(.loading-screen)').forEach(el => {
+
+
+
+                        el.style.opacity = '1';
+
+
+
+                        el.style.transition = 'opacity 0.5s ease-in';
+
+
+
+                    });
+
+
+
+                    
+
+
+                setTimeout(() => {
+
+                        loadingScreen.style.display = 'none';
+
+
+                        initializeMainContent();
+
+
+                    }, 500);
+
+
+
+                }, 500);
+
+
+            }
+
+
+
+            // Update progress display
+
+
+            loadingProgress.textContent = `${Math.min(Math.floor(progress), 100)}%`;
+
+
+            
+
+            // Grow grass based on progress
+
+
+            const growthScale = progress / 100;
+
+
+            document.querySelectorAll('.loading-grass').forEach(grass => {
+
+
+                grass.style.setProperty('--growth-scale', growthScale);
+
+
+            });
+
+
+
+            // Add new grass blades as progress increases
+
+
+            if(progress > 30 && Math.random() < 0.2) {
+
+
+                const grass = document.createElement('div');
+
+
+                grass.className = 'loading-grass';
+
+
+                grass.style.left = `${Math.random() * 100}%`;
+
+
+                grass.style.setProperty('--growth-scale', growthScale);
+
+
+                grass.style.animationDelay = '0s';
+
+
+                const height = 30 + Math.random() * 20;
+
+
+                grass.style.height = `${height}px`;
+
+
+                loadingGrassContainer.appendChild(grass);
+
+
+            }
+
+
+
+
+            // Update loading text
+
+
+            if(Math.random() < 0.2) {
+
+
+                loadingText.style.opacity = '0';
+
+            
+                setTimeout(() => {
+
+
+                    loadingText.textContent = loadingTexts[Math.floor(Math.random() * loadingTexts.length)];
+
+
+                    loadingText.style.opacity = '1';
+
+
+                }, 300);
+
+
+
+            }
+
+
+
+        }, 50);
+
+
+
+
+
+
+
+        // Function to initialize main content
+
+
+
+        function initializeMainContent() {
+
+
+
+            // Your existing initialization code here
+
+
+
+            const grassContainer = document.querySelector('.grass-container');
+
+
+
+            for(let i = 0; i < 100; i++) {
+
+
+
+                const blade = document.createElement('div');
+
+
+
+                blade.className = 'grass-blade';
+
+
+
+                blade.style.left = `${Math.random() * 100}%`;
+
+
+
+                blade.style.animationDelay = `${Math.random() * 2}s`;
+
+
+
+                grassContainer.appendChild(blade);
+
+
+
+            }
+
+
+
+            
+
+
+
+            // Re-initialize any other necessary components
+
+
+
+            // Add any other initialization code you need
+
+
+
+        }
+
+
+
+
+
+
 
         const grassContainer = document.querySelector('.grass-container');
 
+
+
         const messagePopup = document.querySelector('.message-popup');
+
+
 
         const achievement = document.querySelector('.achievement');
 
+
+
         const pointsDisplay = document.querySelector('.points');
+
+
 
         const grassLevel = document.querySelector('.grass-level');
 
+
+
         const sunMoon = document.querySelector('.sun-moon');
+
+
 
         const stars = document.querySelector('.stars');
 
+
+
         const body = document.body;
+
+
 
         let isNightMode = false;
 
 
 
+
+
+
+
         // Funny messages
+
+
 
         const messages = [
 
+
+
             "👀 OMG, real grass!",
+
+
 
             "🌿 First time outside?",
 
+
+
             "😱 It's not pixel art!",
+
+
 
             "🌱 Nature.exe is working",
 
+
+
             "💚 Grass: Touched ✓",
+
+
 
             "🎮 Tutorial: Touch Grass - Completed!",
 
+
+
             "🌿 +1 Real Life XP",
+
+
 
             "😌 Mom would be proud",
 
+
+
             "🌱 Achievement Unlocked: Grass Feeler",
+
+
 
             "💪 Sigma Grindset: Paused",
 
+
+
             "🤓 Reddit Karma -100",
+
+
 
             "📱 Discord Status: Touching Grass",
 
+
+
             "🎮 Gamer Mode: Deactivated",
+
+
 
             "🌿 Grass Touching Speedrun: PB"
 
+
+
         ];
+
+
+
+
 
 
 
         let touchCount = 0;
 
+
+
         let lastMessage = '';
 
 
 
-        // Generate grass blades
 
-        function generateGrass() {
-
-            const bladeCount = 150; // Increased number of blades
-
-            
-
-            for(let i = 0; i < bladeCount; i++) {
-
-                const blade = document.createElement('div');
-
-                blade.className = 'grass-blade';
-
-                
-
-                // Randomize blade properties
-
-                const height = 30 + Math.random() * 20; // Random height between 30-50px
-
-                const width = 8 + Math.random() * 12; // Random width between 8-20px
-
-                const position = Math.random() * 100; // Random position
-
-                const delay = Math.random() * 2; // Random animation delay
-
-                const duration = 2 + Math.random() * 2; // Random animation duration
-
-                
-
-                blade.style.height = `${height}px`;
-
-                blade.style.width = `${width}px`;
-
-                blade.style.left = `${position}%`;
-
-                blade.style.animationDelay = `-${delay}s, -${delay * 1.5}s`;
-
-                blade.style.animationDuration = `${duration}s, ${duration * 1.3}s`;
-
-                
-
-                // Add slight color variation
-
-                const hue = Math.random() * 20 - 10; // ±10 hue variation
-
-                const saturation = 100 + (Math.random() * 20 - 10); // ±10% saturation
-
-                const lightness = 40 + (Math.random() * 20 - 10); // ±10% lightness
-
-                blade.style.background = `linear-gradient(to top, 
-
-                    hsl(120, ${saturation}%, ${lightness}%),
-
-                    hsl(120, ${saturation}%, ${lightness + 10}%)
-
-                )`;
-
-                
-
-                grassContainer.appendChild(blade);
-
-            }
-
-        }
-
-
-
-        // Call the function when the page loads
-
-        document.addEventListener('DOMContentLoaded', generateGrass);
 
 
 
         function updateGrassLevel(touches) {
 
+
+
             const levels = [
+
+
 
                 { threshold: 0, rank: "Grass Newbie" },
 
+
+
                 { threshold: 10, rank: "Grass Apprentice" },
+
+
 
                 { threshold: 25, rank: "Grass Enthusiast" },
 
+
+
                 { threshold: 50, rank: "Grass Master" },
+
+
 
                 { threshold: 100, rank: "Grass Guru" },
 
+
+
                 { threshold: 200, rank: "Touch Grass Legend" },
+
+
 
                 { threshold: 500, rank: "Grass Whisperer" },
 
+
+
                 { threshold: 1000, rank: "Grass God" }
+
+
 
             ];
 
 
 
+
+
+
+
             const currentLevel = levels.reverse().find(level => touches >= level.threshold);
+
+
 
             grassLevel.textContent = `Rank: ${currentLevel.rank}`;
 
+
+
         }
+
+
+
+
 
 
 
         // Touch grass interaction
 
-        function touchGrass(x, y) {
-
-            const blades = document.elementsFromPoint(x, y)
-
-                .filter(el => el.classList.contains('grass-blade'));
-
-            
-
-            blades.forEach(blade => {
-
-                blade.style.animation = 'none';
-
-                blade.offsetHeight; // Trigger reflow
-
-                blade.style.animation = `
-
-                    grassSway 3s ease-in-out infinite,
-
-                    grassWave 4s ease-in-out infinite,
-
-                    touchedGrass 0.5s ease-out
-
-                `;
-
-            });
-
-        }
-
 
 
         grassContainer.addEventListener('click', (e) => {
 
+
+
             touchCount++;
+
+
 
             pointsDisplay.textContent = touchCount;
 
+
+
             updateGrassLevel(touchCount);
+
+
 
             
 
+
+
             let message;
+
+
 
             do {
 
+
+
                 message = messages[Math.floor(Math.random() * messages.length)];
 
+
+
             } while (message === lastMessage);
+
+
 
             lastMessage = message;
 
 
 
+
+
+
+
             messagePopup.textContent = message;
+
+
 
             messagePopup.style.left = e.pageX + 'px';
 
+
+
             messagePopup.style.top = (e.pageY - 50) + 'px';
 
-            messagePopup.style.opacity = '1';
+
+
+            messagePopup.classList.add('show');
+
+
 
             
-
-            if (touchCount % 10 === 0) {
-
-                achievement.style.right = '20px';
-
-                achievement.style.opacity = '1';
-
-                setTimeout(() => {
-
-                    achievement.style.right = '-500px';
-
-                    achievement.style.opacity = '0';
-
-                }, 3000);
-
-            }
-
-
-
-            touchGrass(e.clientX, e.clientY);
 
 
 
             setTimeout(() => {
 
-                messagePopup.style.opacity = '0';
+
+
+                messagePopup.classList.remove('show');
+
+
 
             }, 2000);
 
 
 
-            pointsDisplay.style.transform = 'scale(1.2)';
-
-            setTimeout(() => {
-
-                pointsDisplay.style.transform = 'scale(1)';
-
-            }, 200);
 
 
 
-            checkRankProgress(touchCount);
+
+            if (touchCount % 10 === 0) {
+
+
+
+                achievement.style.right = '20px';
+
+
+
+                achievement.style.opacity = '1';
+
+
+
+                setTimeout(() => {
+
+
+
+                    achievement.style.right = '-500px';
+
+
+
+                    achievement.style.opacity = '0';
+
+
+
+                }, 3000);
+
+
+
+            }
+
+
 
         });
+
+
+
+
 
 
 
         // Toggle day/night
 
+
+
         sunMoon.addEventListener('click', () => {
+
+
 
             isNightMode = !isNightMode;
 
-            
+
 
             sunMoon.classList.toggle('moon');
 
+
+
             body.classList.toggle('night-mode');
 
-            stars.classList.toggle('visible');
+
+
+            grassContainer.classList.toggle('night');
+
+
 
             
 
+
+
             document.querySelectorAll('.grass-blade').forEach(blade => {
 
+
+
                 blade.classList.toggle('night');
+
+
 
             });
 
 
 
-            if (isNightMode) {
-
-                sunMoon.style.transform = 'rotate(360deg)';
-
-            } else {
-
-                sunMoon.style.transform = 'rotate(0deg)';
-
-            }
-
         });
 
 
 
-        // Cursor movement
+
+
+
+
+        // Custom cursor
+
+
 
         const cursor = document.querySelector('.custom-cursor');
 
+
+
         document.addEventListener('mousemove', (e) => {
+
+
 
             cursor.style.left = e.clientX - 20 + 'px';
 
+
+
             cursor.style.top = e.clientY - 20 + 'px';
+
+
 
         });
 
 
 
-        // Add SVG title with drawing animation
-
-        const titleSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-
-        titleSvg.setAttribute("class", "title-svg");
-
-        titleSvg.setAttribute("viewBox", "0 0 600 100");
-
-        titleSvg.innerHTML = `
-
-            <defs>
-
-                <path id="curve" d="M20,85 Q300,95 580,85" fill="none"/>
-
-            </defs>
-
-            <text x="50" y="70" font-size="60" font-family="Monarda, Arial Black">
-
-                $TOUCHGRASS
-
-                <animate attributeName="stroke-dashoffset" 
-
-                         from="1000" 
-
-                         to="0" 
-
-                         dur="3s"
-
-                         fill="freeze" />
-
-            </text>
-
-            <path class="underline" 
-
-                  d="M20,85 Q300,95 580,85" 
-
-                  stroke="white" 
-
-                  stroke-width="3"
-
-                  stroke-linecap="round">
-
-                <animate attributeName="stroke-dashoffset"
-
-                         from="600"
-
-                         to="0"
-
-                         dur="1.5s"
-
-                         begin="3s"
-
-                         fill="freeze" />
-
-                <animate attributeName="stroke-dasharray"
-
-                         from="600"
-
-                         to="600"
-
-                         dur="1.5s"
-
-                         begin="3s"
-
-                         fill="freeze" />
-
-            </path>
-
-        `;
-
-        document.body.insertBefore(titleSvg, document.querySelector('.title'));
 
 
 
-        // Enhanced confetti function
 
-        function createConfetti() {
+        // Create animated clouds
 
-            const colors = ['#4CAF50', '#45a049', '#357a38', '#66bb6a', '#81c784', '#a5d6a7'];
 
-            
 
-            // Create explosion effect
+        function createClouds() {
 
-            for (let i = 0; i < 150; i++) {  // More particles
 
-                const confetti = document.createElement('div');
 
-                confetti.className = 'confetti';
+            const cloudCount = 6;
+
+
+
+            for(let i = 0; i < cloudCount; i++) {
+
+
+
+                const cloud = document.createElement('div');
+
+
+
+                cloud.className = 'loading-cloud';
+
+
 
                 
 
-                // Center the initial position
 
-                confetti.style.left = '50%';
 
-                confetti.style.top = '50%';
+                // Random cloud properties
+
+
+
+                const width = 80 + Math.random() * 100;
+
+
+
+                const top = Math.random() * 40;
+
+
+
+                const duration = 15 + Math.random() * 10;
+
+
+
+                const delay = -Math.random() * 15;
+
+
 
                 
 
-                // Random sizes
 
-                const size = 5 + Math.random() * 15;
 
-                confetti.style.width = size + 'px';
+                cloud.style.width = `${width}px`;
 
-                confetti.style.height = size + 'px';
+
+
+                cloud.style.top = `${top}%`;
+
+
+
+                cloud.style.animationDuration = `${duration}s`;
+
+
+
+                cloud.style.animationDelay = `${delay}s`;
+
+
 
                 
 
-                // Random colors
-
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
-                
-
-                // Random directions
-
-                const angle = Math.random() * 360;
-
-                const velocity = 15 + Math.random() * 15;
-
-                confetti.style.setProperty('--angle', angle + 'deg');
-
-                confetti.style.setProperty('--velocity', velocity + 'px');
-
-                
-
-                confetti.style.animation = `confettiExplosion 3s ease-out forwards`;  // Longer duration
-
-                document.body.appendChild(confetti);
 
 
+                loadingScreen.appendChild(cloud);
 
-                confetti.addEventListener('animationend', () => {
 
-                    confetti.remove();
-
-                });
 
             }
+
+
 
         }
 
 
 
-        // Add these styles
 
-        const style = document.createElement('style');
 
-        style.textContent = `
 
-            @keyframes confettiExplosion {
 
-                0% {
+        // Call cloud creation immediately after defining the function
 
-                    transform: translate(-50%, -50%) rotate(0deg);
 
-                    opacity: 1;
 
-                }
+        createClouds();
 
-                15% {
 
-                    transform: translate(
 
-                        calc(-50% + (var(--velocity) * cos(var(--angle)))), 
 
-                        calc(-50% + (var(--velocity) * sin(var(--angle))))
 
-                    ) rotate(360deg);
 
-                    opacity: 1;
 
-                }
+        // Add periodic pulse animation to draw attention
 
-                100% {
 
-                    transform: translate(
 
-                        calc(-50% + (var(--velocity) * 3 * cos(var(--angle)))), 
+        const twitterHandle = document.querySelector('.twitter-handle');
 
-                        calc(-50% + (var(--velocity) * 3 * sin(var(--angle)) + 200px))
 
-                    ) rotate(720deg);
 
-                    opacity: 0;
+        
 
-                }
 
-            }
 
-        `;
+        function addPulse() {
 
-        document.head.appendChild(style);
 
 
+            twitterHandle.classList.add('pulse');
 
-        // Trigger confetti exactly after animations
 
-        setTimeout(createConfetti, 4500); // 3s for text + 1.5s for underline
 
+            setTimeout(() => {
 
 
-        const motivationPopup = document.querySelector('.motivation-popup');
 
-        const motivationalMessages = [
+                twitterHandle.classList.remove('pulse');
 
-            "🌱 Don't let others touch grass before you!",
 
-            "🏆 Your rank awaits! Touch more grass!",
 
-            "💪 You're just one touch away from greatness!",
+            }, 2000);
 
-            "🌿 The grass isn't greener elsewhere - touch it here!",
 
-            "⭐ Future Grass God in training!",
-
-            "🎮 Put down that controller and touch some grass!",
-
-            "🌱 Your grass touching skills are legendary!",
-
-            "💫 Touch grass to assert dominance!",
-
-            "🎯 Target acquired: Fresh grass ahead!",
-
-            "🚀 To the moon? No - to the grass!"
-
-        ];
-
-
-
-        function showMotivationalMessage() {
-
-            if (Math.random() < 0.3 && !motivationPopup.classList.contains('show')) {
-
-                const message = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
-
-                motivationPopup.textContent = message;
-
-                
-
-                // Random position (avoiding edges)
-
-                const maxX = window.innerWidth - motivationPopup.offsetWidth - 40;
-
-                const maxY = window.innerHeight - motivationPopup.offsetHeight - 40;
-
-                const randomX = 20 + Math.random() * maxX;
-
-                const randomY = 20 + Math.random() * (maxY - 100); // Avoid bottom grass area
-
-                
-
-                motivationPopup.style.left = `${randomX}px`;
-
-                motivationPopup.style.top = `${randomY}px`;
-
-                
-
-                motivationPopup.classList.add('show');
-
-                
-
-                setTimeout(() => {
-
-                    motivationPopup.classList.remove('show');
-
-                }, 3000);
-
-            }
 
         }
 
 
 
-        // Show messages periodically
-
-        setInterval(showMotivationalMessage, 8000);
 
 
 
-        // Also show messages when close to rank up
 
-        function checkRankProgress(touches) {
+        // Pulse every 30 seconds
 
-            const nextRank = [10, 25, 50, 100, 200, 500, 1000].find(threshold => touches < threshold);
 
-            if (nextRank && (nextRank - touches) <= 3) {
 
-                motivationPopup.textContent = `🎯 Only ${nextRank - touches} more touches to rank up!`;
+        setInterval(addPulse, 30000);
 
-                motivationPopup.style.left = '50%';
 
-                motivationPopup.style.top = '20%';
 
-                motivationPopup.style.transform = 'translateX(-50%)';
+        
 
-                motivationPopup.classList.add('show');
 
-                
 
-                setTimeout(() => {
+        // Initial pulse after 5 seconds
 
-                    motivationPopup.classList.remove('show');
 
-                }, 3000);
 
-            }
+        setTimeout(addPulse, 5000);
 
-        }
 
     </script>
 
